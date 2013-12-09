@@ -1,0 +1,31 @@
+{
+  "name": "relative-fs",
+  "version": "0.0.0",
+  "description": "Wraps function from the fs module to make their path arguments relative to a another directory",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test.js --require should"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:spenceralger/relative-fs.git"
+  },
+  "keywords": [
+    "relative",
+    "fs",
+    "file-system",
+    "wrapper"
+  ],
+  "author": "Spencer Alger",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/spenceralger/relative-fs/issues"
+  },
+  "homepage": "https://github.com/spenceralger/relative-fs",
+  "devDependencies": {
+    "should": "~2.1.1",
+    "sinon": "~1.7.3",
+    "mocha": "~1.15.1"
+  },
+  "dependencies": {}
+}
