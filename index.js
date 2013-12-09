@@ -50,32 +50,30 @@ var toWrap = {
   existsSync: 1, // (path)
 };
 
-fs.relativeTo = function (root) {
-  function wrap(method, pathArgs) {
-    if (!fs[method]) {
-      throw new TypeError('fs module has no method \'%s\'', method);
+var fsKeys = Object.keys(fs);
+
+function wrap(method, pathArgs) {
+  return function (/* path, path, etc.. */) {
+    var args = [];
+
+    for (var i = 0; i < arguments.length; i++) {
+      if (i < pathArgs && typeof arguments[i] === 'string') {
+        args[i] = path.resolve(root, arguments[i]);
+      } else {
+        args[i] = arguments[i];
+      }
     }
 
-    return function () {
-      var args = [];
+    return method.apply(fs, args);
+  };
+}
 
-      for (var i = 0; i < arguments.length; i++) {
-        if (i < pathArgs && typeof arguments[i] === 'string') {
-          args[i] = path.resolve(root, arguments[i]);
-        } else {
-          args[i] = arguments[i];
-        }
-      }
-
-      return fs[method].apply(fs, args);
-    };
-  }
-
+exports.relativeTo = function (root) {
   var wrapped = {};
 
-  Object.keys(fs).forEach(function (key) {
+  fsKeys.forEach(function (key) {
     if (toWrap.hasOwnProperty(key)) {
-      wrapped[key] = wrap(key, toWrap[key]);
+      wrapped[key] = wrap(fs[key], toWrap[key]);
     } else {
       wrapped[key] = fs[key];
     }

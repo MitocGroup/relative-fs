@@ -13,9 +13,7 @@ var file = fs.readFileSync(path.join(__dirname, './some-file'));
 
 Into this:
 ```
-require('relative-fs');
-var fs = require('fs').relativeTo(__dirname);
-
+var fs = require('relative-fs').relativeTo(__dirname);
 var file = fs.readFileSync('./some-file');
 ```
 
