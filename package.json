@@ -1,10 +1,11 @@
 {
   "name": "relative-fs",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Wraps function from the fs module to make their path arguments relative to a another directory",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test.js --require should"
+    "test": "mocha test.js --require should",
+    "prepublish": "npm test"
   },
   "repository": {
     "type": "git",

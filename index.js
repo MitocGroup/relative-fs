@@ -52,7 +52,8 @@ var toWrap = {
 
 var fsKeys = Object.keys(fs);
 
-function wrap(method, pathArgs) {
+function wrap(root, methodName) {
+  var pathArgs = toWrap[methodName];
   return function (/* path, path, etc.. */) {
     var args = [];
 
@@ -64,7 +65,7 @@ function wrap(method, pathArgs) {
       }
     }
 
-    return method.apply(fs, args);
+    return fs[methodName].apply(fs, args);
   };
 }
 
@@ -73,7 +74,7 @@ exports.relativeTo = function (root) {
 
   fsKeys.forEach(function (key) {
     if (toWrap.hasOwnProperty(key)) {
-      wrapped[key] = wrap(fs[key], toWrap[key]);
+      wrapped[key] = wrap(root, key);
     } else {
       wrapped[key] = fs[key];
     }
