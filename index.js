@@ -48,6 +48,8 @@ var toWrap = {
   watch: 1, // (filename, [options], [listener])
   exists: 1, // (path, callback)
   existsSync: 1, // (path)
+  createReadStream: 1, // (path, [options])
+  createWriteStream: 1, // (path, [options])
 };
 
 var fsKeys = Object.keys(fs);
