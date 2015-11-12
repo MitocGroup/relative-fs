@@ -61,7 +61,7 @@ function wrap(root, methodName) {
 
     for (var i = 0; i < arguments.length; i++) {
       if (i < pathArgs && typeof arguments[i] === 'string') {
-        args[i] = path.resolve(root, arguments[i]);
+        args[i] = path.join(root, arguments[i]);
       } else {
         args[i] = arguments[i];
       }
